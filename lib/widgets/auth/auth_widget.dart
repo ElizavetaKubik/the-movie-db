@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_movie_db/Theme/app_button_style.dart';
-import 'package:the_movie_db/Theme/app_colors.dart';
+import 'package:the_movie_db/Theme/styles.dart';
 
 class AuthWidget extends StatefulWidget {
   const AuthWidget({super.key});
@@ -99,21 +98,6 @@ class __FormWidgetState extends State<_FormWidget> {
   @override
   Widget build(BuildContext context) {
     const textSyle = TextStyle(color: Color(0xff212529), fontSize: 16);
-    const textFieldStyle = InputDecoration(
-      border: OutlineInputBorder(),
-      enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          width: 1,
-          color: Colors.black26,
-        ),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(width: 1, color: AppColors.mainLightBlue),
-      ),
-      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-      isCollapsed: true,
-      //focusColor: Color(0xff01b4f4),
-    );
 
     final errorText = this.errorText;
     return Column(
@@ -132,7 +116,7 @@ class __FormWidgetState extends State<_FormWidget> {
         ),
         const SizedBox(height: 5),
         TextField(
-          decoration: textFieldStyle,
+          decoration: AppTextFieldStyle.textFieldStyle,
           controller: _loginTextController,
         ),
         const SizedBox(height: 20),
@@ -142,7 +126,7 @@ class __FormWidgetState extends State<_FormWidget> {
         ),
         const SizedBox(height: 5),
         TextField(
-          decoration: textFieldStyle,
+          decoration: AppTextFieldStyle.textFieldStyle,
           obscureText: true,
           controller: _passordTextController,
         ),
@@ -151,27 +135,13 @@ class __FormWidgetState extends State<_FormWidget> {
           children: [
             ElevatedButton(
               onPressed: _auth,
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all(const Color(0xff01b4f4)),
-                foregroundColor: MaterialStateProperty.all(Colors.white),
-                textStyle: MaterialStateProperty.all(
-                    const TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
-                padding: MaterialStateProperty.all(
-                  const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-                ),
-              ),
+              style: AppButtonStyle.loginButtonStyle,
               child: const Text('Login'),
             ),
             const SizedBox(width: 30),
             TextButton(
               onPressed: _resetPassword,
-              style: ButtonStyle(
-                textStyle: MaterialStateProperty.all(const TextStyle(
-                    /*fontWeight: FontWeight.w700,*/ fontSize: 16)),
-                foregroundColor:
-                    MaterialStateProperty.all(const Color(0xff01b4f4)),
-              ),
+              style: AppButtonStyle.linkButton,
               child: const Text('Reset password'),
             ),
           ],
