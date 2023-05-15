@@ -118,6 +118,7 @@ class __FormWidgetState extends State<_FormWidget> {
         TextField(
           decoration: AppTextFieldStyle.textFieldStyle,
           controller: _loginTextController,
+          textInputAction: TextInputAction.next,
         ),
         const SizedBox(height: 20),
         const Text(
@@ -126,8 +127,11 @@ class __FormWidgetState extends State<_FormWidget> {
         ),
         const SizedBox(height: 5),
         TextField(
+          textInputAction: TextInputAction.done,
           decoration: AppTextFieldStyle.textFieldStyle,
           obscureText: true,
+          autocorrect: false,
+          enableSuggestions: false,
           controller: _passordTextController,
         ),
         const SizedBox(height: 10),
