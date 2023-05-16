@@ -2,81 +2,175 @@ import 'package:flutter/material.dart';
 import 'package:the_movie_db/Theme/styles.dart';
 import 'package:the_movie_db/resources/resources.dart';
 
-class MovieListWidget extends StatelessWidget {
-  const MovieListWidget({super.key});
+class Movie {
+  final String imageName;
+  final String title;
+  final String time;
+  final String description;
+
+  Movie({
+    required this.imageName,
+    required this.title,
+    required this.time,
+    required this.description,
+  });
+}
+
+class MovieListWidget extends StatefulWidget {
+  MovieListWidget({super.key});
+
+  @override
+  State<MovieListWidget> createState() => _MovieListWidgetState();
+}
+
+class _MovieListWidgetState extends State<MovieListWidget> {
+  final _movies = [
+    Movie(
+      imageName: AppImages.temp,
+      title: 'ira',
+      time: '12.12.2012',
+      description: 'something',
+    ),
+    Movie(
+      imageName: AppImages.temp,
+      title: 'petya',
+      time: '12.12.2012',
+      description: 'something',
+    ),
+    Movie(
+      imageName: AppImages.temp,
+      title: 'petyara',
+      time: '12.12.2012',
+      description: 'something',
+    ),
+    Movie(
+      imageName: AppImages.temp,
+      title: 'pentagon',
+      time: '12.12.2012',
+      description: 'something',
+    ),
+    Movie(
+      imageName: AppImages.temp,
+      title: 'akakiy',
+      time: '12.12.2012',
+      description: 'something',
+    ),
+  ];
+
+  var _filteredMovies = <Movie>[];
+  final _searchController = TextEditingController();
+
+  void _searchMovies() {
+    final query = _searchController.text;
+    if (query.isNotEmpty) {
+      _filteredMovies = _movies.where((Movie movie) {
+        return movie.title.toLowerCase().contains(query.toLowerCase());
+      }).toList();
+    } else {
+      _filteredMovies = _movies.toList();
+    }
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _searchController.addListener(_searchMovies);
+    _filteredMovies = _movies.toList();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: 10,
-        itemExtent: 165,
-        itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-            child: Stack(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.black.withOpacity(0.2)),
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        blurRadius: 8,
-                        offset: const Offset(0, 2),
+    return Stack(
+      children: [
+        ListView.builder(
+            padding: const EdgeInsets.only(top: 60),
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            itemCount: _filteredMovies.length,
+            itemExtent: 165,
+            itemBuilder: (BuildContext context, int index) {
+              final movie = _filteredMovies[index];
+              return Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border:
+                            Border.all(color: Colors.black.withOpacity(0.2)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  clipBehavior: Clip.hardEdge,
-                  child: Row(
-                    children: [
-                      Image(image: AssetImage(AppImages.temp)),
-                      const SizedBox(width: 15),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            SizedBox(height: 20),
-                            Text(
-                              'Lorem ipsum',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 16),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                      clipBehavior: Clip.hardEdge,
+                      child: Row(
+                        children: [
+                          Image(image: AssetImage(movie.imageName)),
+                          const SizedBox(width: 15),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(height: 20),
+                                Text(
+                                  movie.title,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                const SizedBox(height: 5),
+                                Text(
+                                  movie.time,
+                                  style: const TextStyle(color: Colors.grey),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                const SizedBox(height: 20),
+                                Text(
+                                  movie.description,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
                             ),
-                            SizedBox(height: 5),
-                            Text(
-                              'March 12th 2022',
-                              style: TextStyle(color: Colors.grey),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            SizedBox(height: 20),
-                            Text(
-                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
-                        ),
+                          ),
+                          const SizedBox(width: 10),
+                        ],
                       ),
-                      const SizedBox(width: 10),
-                    ],
-                  ),
+                    ),
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
+                        onTap: () {
+                          print('kjkj');
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-                Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    onTap: () {
-                      print('kjkj');
-                    },
-                  ),
-                ),
-              ],
-            ),
-          );
-        });
+              );
+            }),
+        Padding(
+          padding: const EdgeInsets.all(10),
+          child: TextField(
+            decoration: AppTextFieldStyle.movieSearchTextFieldStyle,
+            controller: _searchController,
+          ),
+        ),
+      ],
+    );
   }
 }

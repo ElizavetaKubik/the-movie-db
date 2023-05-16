@@ -40,6 +40,29 @@ abstract class AppTextFieldStyle {
     contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
     isCollapsed: true,
   );
+
+  static final movieSearchTextFieldStyle = InputDecoration(
+    border: const OutlineInputBorder(),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+      borderSide: const BorderSide(
+        width: 1,
+        color: Colors.black26,
+      ),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+      borderSide: const BorderSide(
+        width: 1,
+        color: AppColors.mainLightBlue,
+      ),
+    ),
+    contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+    isCollapsed: true,
+    filled: true,
+    fillColor: Colors.white.withAlpha(235),
+    prefixIcon: const Icon(Icons.search),
+  );
 }
 
 abstract class AppColors {
