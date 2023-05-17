@@ -75,7 +75,7 @@ class __FormWidgetState extends State<_FormWidget> {
   final _loginTextController = TextEditingController(text: 'admin');
   final _passordTextController = TextEditingController(text: 'admin');
 
-  String? errorText = null;
+  String? errorText;
 
   void _auth() {
     final login = _loginTextController.text;

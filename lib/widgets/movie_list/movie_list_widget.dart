@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:the_movie_db/Theme/styles.dart';
 import 'package:the_movie_db/resources/resources.dart';
+import 'package:the_movie_db/widgets/movie_list/radial_percent_widget.dart';
 
 class Movie {
   final String imageName;
@@ -17,7 +18,7 @@ class Movie {
 }
 
 class MovieListWidget extends StatefulWidget {
-  MovieListWidget({super.key});
+  const MovieListWidget({super.key});
 
   @override
   State<MovieListWidget> createState() => _MovieListWidgetState();
@@ -168,6 +169,19 @@ class _MovieListWidgetState extends State<MovieListWidget> {
           child: TextField(
             decoration: AppTextFieldStyle.movieSearchTextFieldStyle,
             controller: _searchController,
+          ),
+        ),
+        const RadialPercentWidget(
+          percent: 0.72,
+          fillColor: AppColors.mainDakrBlue,
+          lineColor: Colors.green,
+          freeColor: Colors.yellow,
+          lineWidth: 5,
+          child: Center(
+            child: Text(
+              '72%',
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
           ),
         ),
       ],
