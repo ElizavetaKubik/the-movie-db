@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:the_movie_db/Theme/styles.dart';
 import 'package:the_movie_db/resources/resources.dart';
-import 'package:the_movie_db/widgets/movie_list/radial_percent_widget.dart';
+import 'package:the_movie_db/widgets/elements/radial_percent_widget.dart';
 
 class Movie {
+  final int id;
   final String imageName;
   final String title;
   final String time;
   final String description;
 
   Movie({
+    required this.id,
     required this.imageName,
     required this.title,
     required this.time,
@@ -27,30 +29,35 @@ class MovieListWidget extends StatefulWidget {
 class _MovieListWidgetState extends State<MovieListWidget> {
   final _movies = [
     Movie(
+      id: 1,
       imageName: AppImages.temp,
       title: 'ira',
       time: '12.12.2012',
       description: 'something',
     ),
     Movie(
+      id: 2,
       imageName: AppImages.temp,
       title: 'petya',
       time: '12.12.2012',
       description: 'something',
     ),
     Movie(
+      id: 3,
       imageName: AppImages.temp,
       title: 'petyara',
       time: '12.12.2012',
       description: 'something',
     ),
     Movie(
+      id: 4,
       imageName: AppImages.temp,
       title: 'pentagon',
       time: '12.12.2012',
       description: 'something',
     ),
     Movie(
+      id: 5,
       imageName: AppImages.temp,
       title: 'akakiy',
       time: '12.12.2012',
@@ -79,6 +86,11 @@ class _MovieListWidgetState extends State<MovieListWidget> {
 
     _searchController.addListener(_searchMovies);
     _filteredMovies = _movies.toList();
+  }
+
+  void _onMovieTap(int index) {
+    final id = _movies[index].id;
+    Navigator.of(context).pushNamed('main_screen/movie_details', arguments: id);
   }
 
   @override
@@ -156,7 +168,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                         borderRadius:
                             const BorderRadius.all(Radius.circular(10)),
                         onTap: () {
-                          print('kjkj');
+                          _onMovieTap(index);
                         },
                       ),
                     ),
@@ -171,19 +183,19 @@ class _MovieListWidgetState extends State<MovieListWidget> {
             controller: _searchController,
           ),
         ),
-        const RadialPercentWidget(
-          percent: 0.72,
-          fillColor: AppColors.mainDakrBlue,
-          lineColor: Colors.green,
-          freeColor: Colors.yellow,
-          lineWidth: 5,
-          child: Center(
-            child: Text(
-              '72%',
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-          ),
-        ),
+        // const RadialPercentWidget(
+        //   percent: 0.72,
+        //   fillColor: AppColors.mainDakrBlue,
+        //   lineColor: Colors.green,
+        //   freeColor: Colors.yellow,
+        //   lineWidth: 5,
+        //   child: Center(
+        //     child: Text(
+        //       '72%',
+        //       style: TextStyle(color: Colors.white, fontSize: 20),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }
