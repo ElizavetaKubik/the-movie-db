@@ -312,7 +312,7 @@ class _StaffWidget extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 20)
+        SizedBox(height: 30),
       ],
     );
   }

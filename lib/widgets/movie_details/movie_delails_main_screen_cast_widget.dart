@@ -19,11 +19,11 @@ class MovieDetailsMainScreenCastWidget extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 250,
+            height: 280,
             child: Scrollbar(
               child: ListView.builder(
                   itemCount: 20,
-                  itemExtent: 140,
+                  itemExtent: 120,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
@@ -48,22 +48,36 @@ class MovieDetailsMainScreenCastWidget extends StatelessWidget {
                           clipBehavior: Clip.hardEdge,
                           borderRadius: BorderRadius.all(Radius.circular(8)),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Image(image: AssetImage(AppImages.photo)),
                               Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 10, right: 10, top: 10),
-                                child: Text(
-                                  'Paul Rudd',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 16),
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Paul Rudd',
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 16),
+                                    ),
+                                    SizedBox(height: 7),
+                                    Text(
+                                      'Scott Lang / Ant-Man',
+                                      maxLines: 3,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    SizedBox(height: 7),
+                                    Text(
+                                      '1 Episode',
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(color: Colors.black38),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: Text('Scott Lang / Ant-Man'),
                               ),
                             ],
                           ),
