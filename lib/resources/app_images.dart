@@ -11,4 +11,5 @@ class AppImages {
   static const String invoker = 'images/invoker.jpg';
   static const String mirana = 'images/mirana.jpg';
   static const String morph = 'images/morph.jpg';
+  static const String photo = 'images/photo.jpg';
 }
